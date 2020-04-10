@@ -1,5 +1,5 @@
 #!/bin/bash
-. vars.sh
+. bash/vars.sh
 
 if [ -z $1 ]; then
   echo -e "\e[91mmust specify build method - Default or PC\e[0m"
@@ -16,18 +16,7 @@ build-one() {
 }
 
 git status
-#[ ! -z "$(git status --porcelain)" ] && exit 1
-#TODO stash
 
 echo -e "\e[36m========== Building basic ==========\e[0m"
 read -p "continue?"
-git checkout master
 build-one $1
-
-echo -e "\e[36m========== Building steam ==========\e[0m"
-echo "Did you read README.md on steam branch?"
-read -p "continue?"
-git checkout steam
-build-one $1
-
-git checkout master
