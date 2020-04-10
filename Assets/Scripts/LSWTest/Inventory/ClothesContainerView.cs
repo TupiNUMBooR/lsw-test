@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Utils.GameObjects;
 
 namespace LSWTest.Inventory
@@ -9,6 +10,7 @@ namespace LSWTest.Inventory
         public Transform container;
         public GameObject current;
         public GameObject inactiveIcon;
+        public Text price;
 
         protected override void Awake()
         {
@@ -29,7 +31,17 @@ namespace LSWTest.Inventory
         void UpdateIcon()
         {
             Destroy(current);
-            if (modified.clothes) current = Instantiate(modified.clothes.prefab, container);
+            
+            if (modified.clothes != null)
+            {
+                current = Instantiate(modified.clothes.prefab, container);
+                if (modified.isPaid) price.text = $"{modified.clothes.cost}";
+            }
+            else
+            {
+                if (modified.isPaid) price.text = "";
+            }
+            
             UpdateView();
         }
 
