@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Utils.GameObject;
+using Utils.GameObjects;
 
 namespace LSWTest.Inventory
 {
@@ -9,7 +9,9 @@ namespace LSWTest.Inventory
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-            modified.ChangeClothes(Singletone.I.selectedClothes);
+            Singletone.I.selectedClothes.ChangeClothes(
+                modified.ChangeClothes(Singletone.I.selectedClothes.clothes)
+            );
         }
     }
 }

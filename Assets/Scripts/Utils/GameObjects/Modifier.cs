@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Utils.GameObject
+namespace Utils.GameObjects
 {
     public abstract class Modifier<T> : MonoBehaviour
     {
-        public T modified;
+        protected T modified;
 
         protected virtual void Awake()
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.GameObject;
+using Utils.GameObjects;
 
 namespace Utils.Properties
 {

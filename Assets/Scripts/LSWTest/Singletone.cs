@@ -1,12 +1,14 @@
 using LSWTest.Inventory;
+using UnityEngine;
 using Utils.Properties;
 
 namespace LSWTest
 {
-    public class Singletone
+    public class Singletone : MonoBehaviour
     {
+        
         public static Singletone I;
-        public Clothes selectedClothes;
+        public ClothesContainer selectedClothes;
         public FloatProperty money;
 
         void OnEnable()

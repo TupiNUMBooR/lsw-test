@@ -1,5 +1,5 @@
 using UnityEngine;
-using Utils.GameObject;
+using Utils.GameObjects;
 
 namespace LSWTest.Inventory
 {
@@ -8,22 +8,34 @@ namespace LSWTest.Inventory
     {
         public Transform container;
         public GameObject current;
+        public GameObject inactiveIcon;
 
         protected override void Awake()
         {
             base.Awake();
-            modified.ChangeEvent += OnChange;
+            modified.ChangeEvent += UpdateIcon;
+            Singletone.I.money.ChangeEvent += UpdateView;
+            Singletone.I.selectedClothes.ChangeEvent += UpdateView;
+            UpdateIcon();
         }
 
         void OnDestroy()
         {
-            modified.ChangeEvent -= OnChange;
+            modified.ChangeEvent -= UpdateIcon;
+            Singletone.I.money.ChangeEvent -= UpdateView;
+            Singletone.I.selectedClothes.ChangeEvent -= UpdateView;
         }
 
-        void OnChange()
+        void UpdateIcon()
         {
             Destroy(current);
-            current = Instantiate(modified.clothes.prefab, container);
+            if (modified.clothes) current = Instantiate(modified.clothes.prefab, container);
+            UpdateView();
+        }
+
+        void UpdateView()
+        {
+            inactiveIcon.SetActive(modified.isPaid && !modified.CanChangeClothes(Singletone.I.selectedClothes.clothes));
         }
     }
 }
